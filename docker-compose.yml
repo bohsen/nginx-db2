@@ -1,0 +1,85 @@
+# /wordpress-docker/docker-compose.yml
+---
+version: '3.8'
+services:
+  web:
+    container_name: nginx
+    depends_on:
+      - db2
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./app:/app
+    links:
+      - php
+  php:
+    container_name: php
+    build:
+      context: .
+      dockerfile: PHP.Dockerfile
+    volumes:
+      - ./app:/app
+    links:
+      - db2
+  db2:
+    container_name: db2
+    image: ibmcom/db2:latest
+    privileged: true
+    ports:
+      - "50000:50000"
+    environment:
+      - DB_NAME=MYDATABASE
+      - DB_USER=db2user
+      - DB_PASSWORD=db2password
+      - LICENSE=accept
+      ## Creates the database DB_NAME, if its not exists
+      #- STARTUP_MODE=createIfNotExists
+      #- DB_CREATE_SCRIPT=create_wdemo.sql
+      ## loads an old backup of DB_NAME, 
+      ## if the dabase DB_NAME does not exist
+      - STARTUP_MODE=restoreIfNotExists
+      - DB_BACKUP=wdemo.tar.gz
+    volumes:
+      - './data/db2:/database'
+  # db:
+  #   container_name: 'wordpress-conhea-db'
+  #   image: 'mysql:5.7'
+  #   volumes:
+  #     - './data/mysql:/var/lib/mysql'
+  #   ports:
+  #     - 18766:3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: somewordpress
+  #     MYSQL_DATABASE: wordpress_db
+  #     MYSQL_USER: wordpress_user
+  #     MYSQL_PASSWORD: wordpress_password
+  # wordpress:
+  #   container_name: 'wordpress-conhea-test'
+  #   depends_on:
+  #     - db
+  #   image: 'wordpress:latest'
+  #   ports:
+  #     - '80:80'
+  #   environment:
+  #     WORDPRESS_DB_HOST: 'db:3306'
+  #     WORDPRESS_DB_USER: wordpress_user
+  #     WORDPRESS_DB_PASSWORD: wordpress_password
+  #     WORDPRESS_DB_NAME: wordpress_db
+  #   volumes:
+  #     - "./wordpress:/var/www/html"
+  #     - "./plugins:/var/www/html/wp-content/plugins"
+  # pma:
+  #   image: phpmyadmin/phpmyadmin
+  #   environment:
+  #       # https://docs.phpmyadmin.net/en/latest/setup.html#docker-environment-variables
+  #       PMA_HOST: db
+  #       PMA_PORT: 3306
+  #       MYSQL_PASSWORD: wordpress_password
+  #   ports:
+  #       - 8080:80
+  #   links:
+  #       - db:db
+  #   depends_on:
+  #       - db
