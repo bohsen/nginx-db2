@@ -179,3 +179,90 @@ Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203
 Message::
 ReturnCode::0
 ------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 20:13:21 UTC
+Host::c9cfa1d6056d
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 21:02:00 UTC
+Host::cdbd96e08e6a
+------------------------------------------------------------
+Date::09/15/22 Thursday 21:04:34 UTC
+Host::9a6fd29cde49
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 21:15:59 UTC
+Host::9a6fd29cde49
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+------------------------------------------------------------
+Date::09/15/22 Thursday 21:18:21 UTC
+Host::9a6fd29cde49
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 21:26:07 UTC
+Host::9a6fd29cde49
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 21:28:58 UTC
+Host::9a6fd29cde49
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 21:34:52 UTC
+Host::9a6fd29cde49
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 22:02:57 UTC
+Host::9a6fd29cde49
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
+------------------------------------------------------------
+Date::09/15/22 Thursday 22:15:52 UTC
+Host::6e4f7f23d198
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+------------------------------------------------------------
+Date::09/15/22 Thursday 22:18:13 UTC
+Host::6e4f7f23d198
+Command::/opt/ibm/db2/V11.5/instance/db2iupdt_local -u db2fenc1 -k -a server -d db2inst1
+Insttype::1
+Level::VRMF=11.5.7.0,Interim=0,SpecialInstall=2445,SpecialBuild=,bld_level=s2203040646
+Message::
+ReturnCode::0
+------------------------------------------------------------
