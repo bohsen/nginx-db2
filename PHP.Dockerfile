@@ -23,6 +23,9 @@ ENV LD_LIBRARY_PATH=/opt/ibm/clidriver/lib
 ## install ibm_db2 drivers
 RUN pecl install ibm_db2 --with-IBM_DB2=/opt/clidriver pdo_db2 --with-pdo-ibm=/opt/clidriver
 RUN echo "extension=ibm_db2.so" > /usr/local/etc/php/conf.d/ibm_db2.ini
+RUN echo "extension=pdo_ibm.so" >> /usr/local/etc/php/conf.d/ibm_db2.ini
+RUN echo "extension=pdo.so" >> /usr/local/etc/php/conf.d/ibm_db2.ini
+
 RUN echo "extension=ibm_db2.so" >> /usr/local/etc/php/php.ini
 RUN echo "extension=pdo.so" >> /usr/local/etc/php/php.ini
 RUN echo "extension=pdo_ibm.so" >> /usr/local/etc/php/php.ini
