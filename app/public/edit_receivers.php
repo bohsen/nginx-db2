@@ -27,14 +27,12 @@ include 'functions.php';
             <?php
 
             # echo (empty($_POST["accessionnummer"])) ? '<span class="error">* Der er ikke indtastet et accessionnummer</span>' : $_POST["accessionnummer"];
-            
+
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search"])) {
                 if (empty($_POST["accessionnummer"])) {
                     echo '<span class="error">* Der er ikke indtastet et accessionnummer</span>';
                 } else {
                     $resultat = lookup_referral($_POST["accessionnummer"]);
-
-                    
 
                     $receiver = $resultat->get_receiver_id();
                     $receiver_type = $resultat->get_receiver_type();
@@ -51,12 +49,12 @@ include 'functions.php';
                         <label for="t2">Type:</label>
                         <select name="henvisende_instans_type" id="t2">
                     END;
-                    
+
                     if (isset($receiver_type)) {
-                        $type = array('0' => '','1' => 'sygehusafdelingsnummer','2'=>'ydernummer','3'=>'lokationsnummer','4'=>'sorkode' );
+                        $type = array('0' => '', '1' => 'sygehusafdelingsnummer', '2' => 'ydernummer', '3' => 'lokationsnummer', '4' => 'sorkode');
                         foreach ($type as $id => $value) { ?>
-                            <option value="<?php echo $id;?>" <?php echo ($value == $receiver_type) ? ' selected="selected"' : '';?>><?php echo $value;?></option>
-                          <?php }
+                            <option value="<?php echo $id; ?>" <?php echo ($value == $receiver_type) ? ' selected="selected"' : ''; ?>><?php echo $value; ?></option>
+                        <?php }
                     }
 
                     print <<<END
@@ -71,14 +69,14 @@ include 'functions.php';
                         <select name="kopimodtager_type" id="t4">
                         END;
 
-                        if (isset($cc_receiver_type)) {
-                            $type = array('0' => '','1' => 'sygehusafdelingsnummer','2'=>'ydernummer','3'=>'lokationsnummer','4'=>'sorkode' );
-                            foreach ($type as $id => $value) { ?>
-                                <option value="<?php echo $id;?>" <?php echo ($value == $cc_receiver_type) ? ' selected="selected"' : '';?>><?php echo $value;?></option>
-                              <?php }
-                        }
-    
-                        print <<<END
+                    if (isset($cc_receiver_type)) {
+                        $type = array('0' => '', '1' => 'sygehusafdelingsnummer', '2' => 'ydernummer', '3' => 'lokationsnummer', '4' => 'sorkode');
+                        foreach ($type as $id => $value) { ?>
+                            <option value="<?php echo $id; ?>" <?php echo ($value == $cc_receiver_type) ? ' selected="selected"' : ''; ?>><?php echo $value; ?></option>
+            <?php }
+                    }
+
+                    print <<<END
                         </select>
         
                         <br />
