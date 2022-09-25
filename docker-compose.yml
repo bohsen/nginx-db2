@@ -36,13 +36,13 @@ services:
       - DB2INSTANCE=db2inst1
       - DB2INST1_PASSWORD=ChangeMe!
       - LICENSE=accept
-      - SAMPLEDB=true
+      # - SAMPLEDB=true
       ## Creates the database DB_NAME, if its not exists
       # - STARTUP_MODE=createIfNotExists
       # - DB_CREATE_SCRIPT=create_wdemo.sql
       ## loads an old backup of DB_NAME, 
       ## if the dabase DB_NAME does not exist
-      - STARTUP_MODE=restoreIfNotExists
-      - DB_BACKUP=wdemo.tar.gz
+      # - STARTUP_MODE=restoreIfNotExists
+      # - DB_BACKUP=wdemo.tar.gz
     volumes:
       - './data/db2:/database'
