@@ -13,6 +13,9 @@
 </head>
 <?php
 include 'dbconnection.php';
+
+$receiver_type_array = array('0' => 'sygehusafdelingsnummer', '1' => 'ydernummer', '2' => 'lokationsnummer', '3' => 'sorkode');
+$ccreceiver_type_array = array('0' => '', '1' => 'sygehusafdelingsnummer', '2' => 'ydernummer', '3' => 'lokationsnummer', '4' => 'sorkode');
 ?>
 
 <body>
@@ -23,7 +26,7 @@ include 'dbconnection.php';
 
       <label for="t1">Accessionnummer:</label>
 
-      <input type="text" name="accessionnummer" id="t1" value="<?php echo (empty($_POST["accessionnummer"]) || isset($_POST["clear"])) ? '' : $_POST["accessionnummer"] . '" readonly=true disabled=true'; ?>" />
+      <input type="text" name="accessionnummer" id="t1" value="<?php echo (empty($_POST["accessionnummer"]) || isset($_POST["clear"])) ? '' : $_POST["accessionnummer"] . '" readonly=true'; ?>" />
       <input type="submit" name="search" value="Søg" class="button" />
       <input type="submit" name="clear" value="Ryd" class="button" />
 
@@ -56,8 +59,7 @@ include 'dbconnection.php';
             END;
 
             if (isset($receiver_type)) {
-              $type = array('0' => 'sygehusafdelingsnummer', '1' => 'ydernummer', '2' => 'lokationsnummer', '3' => 'sorkode');
-              foreach ($type as $id => $value) { ?>
+              foreach ($receiver_type_array as $id => $value) { ?>
                 <option value="<?php echo $id; ?>" <?php echo ($value == $receiver_type) ? ' selected="selected"' : ''; ?>><?php echo $value; ?></option>
               <?php }
             }
@@ -73,8 +75,7 @@ include 'dbconnection.php';
             END;
 
             if (isset($cc_receiver_type)) {
-              $type = array('0' => '', '1' => 'sygehusafdelingsnummer', '2' => 'ydernummer', '3' => 'lokationsnummer', '4' => 'sorkode');
-              foreach ($type as $id => $value) { ?>
+              foreach ($ccreceiver_type_array as $id => $value) { ?>
                 <option value="<?php echo $id; ?>" <?php echo ($value == $cc_receiver_type) ? ' selected="selected"' : ''; ?>><?php echo $value; ?></option>
       <?php }
             }
@@ -88,14 +89,28 @@ include 'dbconnection.php';
             END;
           }
         }
+      } elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["opdater_henvisning"])) {
+        $accessionnummer =  $_POST["accessionnummer"];
+        $henvisende_instans = $_POST["henvisende_instans"];
+        $henvisende_instans_type = $receiver_type_array[$_POST["henvisende_instans_type"]];
+        $kopi_modtager = $_POST["kopimodtager"];
+        $kopi_modtager_type = $ccreceiver_type_array[$_POST["kopimodtager_type"]];
+
+        echo "Test";
+        // Hvis Henvisende instant er tom
+        
+
+        // Hvis kopimodtager er udfyldt, men kopimodtagertype er tom
+
+        // Hvis kopimodtager er tom, men kopimodtagertype er udfyldt
+
+        $connection = new DbConnection();
+        $resultat = $connection->save_referral($accessionnummer, $henvisende_instans, $henvisende_instans_type, $kopi_modtager, $kopi_modtager_type);
       }
 
       ?>
 
     </fieldset>
   </form>
-
-
 </body>
-
 </html>
