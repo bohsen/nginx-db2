@@ -42,8 +42,8 @@ $ccreceiver_type_array = array('0' => '', '1' => 'sygehusafdelingsnummer', '2' =
           if ($resultat === null) {
             echo '<span class="error">* Fandt ingen henvisning med det indtastede accessionnummer: ' . $_POST["accessionnummer"] . ' </span>';
           } else {
-            $receiver = $resultat->get_receiver_id();
-            $receiver_type = $resultat->get_receiver_type();
+            $receiver = $resultat->get_sender_id();
+            $receiver_type = $resultat->get_sender_type();
             $cc_receiver = $resultat->get_cc_receiver_id();
             $cc_receiver_type = $resultat->get_cc_receiver_type();
 
@@ -96,16 +96,36 @@ $ccreceiver_type_array = array('0' => '', '1' => 'sygehusafdelingsnummer', '2' =
         $kopi_modtager = $_POST["kopimodtager"];
         $kopi_modtager_type = $ccreceiver_type_array[$_POST["kopimodtager_type"]];
 
-        echo "Test";
-        // Hvis Henvisende instant er tom
+        $error = FALSE;
+        // Print fejl hvis Henvisende instant er tom
+        if(empty($henvisende_instans)) {
+          echo '<span class="error">* Henvisende instans må ikke være tom"</span>';
+          $error = TRUE;
+        }
+
+        // Print fejl hvis kopimodtager er udfyldt, men kopimodtagertype er tom
+        if(!empty($kopi_modtager) && $kopi_modtager_type == '') {
+          echo '<span class="error">* Kopimodtagertype skal være udfyldt</span>';
+          $error = TRUE;
+        }
         
-
-        // Hvis kopimodtager er udfyldt, men kopimodtagertype er tom
-
         // Hvis kopimodtager er tom, men kopimodtagertype er udfyldt
+        if(!empty($kopi_modtager_type) && empty($kopi_modtager)) {
+          echo '<span class="error">* Kopimodtager skal være udfyldt</span>';
+          $error = TRUE;
+        }
 
-        $connection = new DbConnection();
-        $resultat = $connection->save_referral($accessionnummer, $henvisende_instans, $henvisende_instans_type, $kopi_modtager, $kopi_modtager_type);
+        if(!$error) {
+          $connection = new DbConnection();
+          // Hvis selve opdatering af henvisning fejler, så dumpes fejlen og der printes at ændringen ikke er gemt
+          $resultat = $connection->save_referral($accessionnummer, $henvisende_instans, $henvisende_instans_type, $kopi_modtager, $kopi_modtager_type);
+          if($resultat) {
+            echo '<span class="result">Ændring gemt</span>';
+          } else {
+            echo '<span class="error">* Ændring blev ikke gemt</span>';
+          }
+          unset($connection);
+        }
       }
 
       ?>
