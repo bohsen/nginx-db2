@@ -29,5 +29,59 @@ include 'dbconnection.php';
 
     </fieldset>
   </form>
+
+  <?php
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search"])) {
+    if (empty($_POST["inactive_code"])) {
+      echo '<span class="error">* Der er ikke indtastet en kode</span>';
+    } else {
+      $connection = new DbConnection();
+      $resultat = $connection->count($_POST["inactive_code"]);
+
+      $search_id = $resultat->get_search_id();
+      $sender_id_count = $resultat->get_sender_id_count();
+      $ccreceiver_count = $resultat->get_ccreceiver_id_count();
+      if(isset($resultat)) {
+        print <<<END
+        <fieldset>
+          <legend>Søgningen fandt</legend>
+          $sender_id_count aktive henvisninger med $search_id som afsender
+          <br />
+          $ccreceiver_count aktive henvisninger med $search_id som kopimodtager
+        </fieldset>
+        END;
+      }
+      if($sender_id_count > 0 && $ccreceiver_count > 0) {
+        ?>
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <input type="hidden" name="old_id" value="<?php echo $search_id ?>">
+        <br />
+        <label for="t5">Ny værdi:</label>
+        <input type="text" name="new_id" id="t5" />
+        <input type="submit" name="update_id" value="Udskift" class="button" />
+        <input type="submit" name="clear" value="Annuller" class="button" />
+      </form>
+        <?php
+      }
+
+      unset($connection);
+    }
+  } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_id"])) {
+    $old_id =  $_POST["old_id"];
+    $new_id = $_POST["new_id"];
+
+    $error = FALSE;
+    // Print fejl hvis udgået eller ny kode ikke er udfyldt
+    if(empty($old_id) || empty($new_id)) {
+      echo '<span class="error">* Ét af felterne mangler at blive udfyldt</span>';
+      $error = TRUE;
+    }
+    
+    if(!$error) {
+      echo 'Saving changes: ' . $old_id .' to ' . $new_id;
+    }
+  }
+  ?>
 </body>
 </html>

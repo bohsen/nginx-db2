@@ -10,7 +10,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./app:/app
     links:
       - php
@@ -34,7 +34,7 @@ services:
     environment:
       - DBNAME=testdb
       - DB2INSTANCE=db2inst1
-      - DB2INST1_PASSWORD=ChangeMe!
+      - DB2INST1_PASSWORD=ChangeMe1
       - LICENSE=accept
       # - SAMPLEDB=true
       ## Creates the database DB_NAME, if its not exists

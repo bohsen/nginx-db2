@@ -78,7 +78,13 @@ $ccreceiver_type_array = array('0' => '', '1' => 'sygehusafdelingsnummer', '2' =
               foreach ($ccreceiver_type_array as $id => $value) { ?>
                 <option value="<?php echo $id; ?>" <?php echo ($value == $cc_receiver_type) ? ' selected="selected"' : ''; ?>><?php echo $value; ?></option>
       <?php }
-            }
+            } else {
+                foreach ($ccreceiver_type_array as $id => $value) { ?>
+                <option value="<?php echo $id; ?>" ><?php echo $value; ?></option>
+                <?php }
+
+                }
+
 
             print <<<END
               </select>
